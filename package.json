@@ -1,0 +1,21 @@
+{
+  "name": "@axetroy/wxapp-socket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/.js",
+  "scripts": {
+    "test": "mocha ./test/*.test.ts -r ts-node/register --color",
+    "test:watch": "gulp test:watch",
+    "build": "webpack --display-error-details --progress --colors",
+    "watch": "webpack --display-error-details --progress --colors --watch",
+    "coverage": "istanbul cover ./**/*.js",
+    "contributor": "./node_modules/.bin/contributors-stat"
+  },
+  "author": "axetroy",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^1.3.3",
+    "typescript": "^2.1.5",
+    "webpack": "v2.2.0-rc.5"
+  }
+}
