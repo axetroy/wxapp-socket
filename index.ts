@@ -23,9 +23,9 @@ class WxSocket {
   private ALL: string = 'ALL';
   private retryCount: number = 0;
   private listener: any = {};
+  private promiseMaps: any = {};
   public socketOpen: boolean = false;
   public messageQueue: any[] = [];
-  public promiseMaps: any = {};
 
   constructor(private config: Config) {
     this.config.retryInterval = this.config.retryInterval && this.config.retryInterval > 100 ? this.config.retryInterval : 3000;

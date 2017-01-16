@@ -42,6 +42,24 @@ wxSocket.send('hello world')
 
 ## API
 
+### new wxSocket(config);
+
+- *Arguments*
+    - *config*
+    ```typescript
+        interface Config {
+          url: string;
+          data?: any;
+          header?: any;
+          method?: string;
+          retryTimes?: number,        // 重连次数，默认无限重连
+          retryInterval?: number,     // 重连间隔，默认3s，可以设置最低100ms
+          success?: () => any;
+          fail?: () => any;
+          complete?: () => any;
+        }
+    ```
+
 ### wxSocket.on([type:string], callback): () => any[]
 
 - *Arguments*
@@ -84,3 +102,13 @@ wxSocket.send('hello world')
     }
   */
 ```
+
+### wxSocket.socketOpen:boolean
+
+当前socket是否正在链接
+
+### wxSocket.messageQueue:array
+
+当前的消息队列，只要在socket未连接，然后又使用wxSocket.send方法的情况下，会把消息放入队列
+
+当socket重新连上之后，会重新发送消息
