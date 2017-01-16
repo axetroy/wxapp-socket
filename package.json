@@ -2,7 +2,7 @@
   "name": "@axetroy/wxapp-socket",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/.js",
+  "main": "dist/wxSocket.js",
   "scripts": {
     "test": "mocha ./test/*.test.ts -r ts-node/register --color",
     "test:watch": "gulp test:watch",
