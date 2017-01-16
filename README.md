@@ -75,6 +75,12 @@ wxSocket.send('hello world')
 - *Arguments*
     - *msg?any*，发送的消息
     - *config:Object*，配置
+    ```typescript
+    interface SendMessageConfig {
+      noResponse?: boolean,          // 无需等待服务器响应，只要数据发送成功，则resolve
+      timeout?: number               // 超时，数据发出之后，xx毫秒没有相应则算超时，reject
+    }
+    ```
 - *Return*
     - {Promise} 返回一个promise
 - *Example*

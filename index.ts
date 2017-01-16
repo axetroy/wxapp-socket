@@ -18,6 +18,11 @@ interface Config {
   complete?: () => any;
 }
 
+interface SendMessageConfig {
+  noResponse?: boolean,          // 无需等待服务器响应，只要数据发送成功，则resolve
+  timeout?: number               // 超时，数据发出之后，xx毫秒没有相应则算超时，reject
+}
+
 class WxSocket {
 
   private ALL: string = 'ALL';
@@ -38,7 +43,7 @@ class WxSocket {
    * @param [config]  {*}
    * @returns {Promise<T>}
    */
-  public send(msg: any, config: any = {}): Promise<any> {
+  public send(msg: any, config?: SendMessageConfig): Promise<any> {
     let content: any = this.wrapMsg(msg);
     const WxSocket: WxSocket = this;
     return new Promise(function (resolve, reject) {
@@ -62,7 +67,7 @@ class WxSocket {
           wx.sendSocketMessage({
             data: JSON.stringify(content),
             success(){
-              if (config.noReponse) {
+              if (config.noResponse) {
                 WxSocket.finishRequest(content.id);
                 resolve();
               }
