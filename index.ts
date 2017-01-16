@@ -62,8 +62,10 @@ class WxSocket {
           wx.sendSocketMessage({
             data: JSON.stringify(content),
             success(){
-              WxSocket.finishRequest(content.id);
-              resolve();
+              if (config.noReponse) {
+                WxSocket.finishRequest(content.id);
+                resolve();
+              }
             },
             fail(){
               WxSocket.finishRequest(content.id);
@@ -189,7 +191,7 @@ class WxSocket {
 
       callbacks = (this.listener[this.ALL] || []).concat(callbacks);
 
-      callbacks.forEach(func => typeof func === 'function' && func(data));
+      callbacks.forEach(func => WxSocket.helper.isFunction(func) && func(data));
 
     });
     return this;
