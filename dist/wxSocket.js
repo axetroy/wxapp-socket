@@ -88,9 +88,9 @@ var WxSocket = (function () {
         this.ALL = 'ALL';
         this.retryCount = 0;
         this.listener = {};
+        this.promiseMaps = {};
         this.socketOpen = false;
         this.messageQueue = [];
-        this.promiseMaps = {};
         this.config.retryInterval = this.config.retryInterval && this.config.retryInterval > 100 ? this.config.retryInterval : 3000;
         this.listen().connect().afterConnect();
     }
@@ -266,6 +266,7 @@ var WxSocket = (function () {
     return WxSocket;
 }());
 WxSocket.helper = {
+    messageIndex: 0,
     isFunction: function (any) {
         return typeof any === 'function';
     },
@@ -278,8 +279,11 @@ WxSocket.helper = {
     isPlainObject: function (any) {
         return Object.prototype.toString.call(any) === '[object Object]';
     },
+    get nextId() {
+        return this.messageIndex++;
+    },
     get id() {
-        return Date.now() + Math.random().toString().substr(2, 3);
+        return Date.now() + '.' + this.nextId;
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
