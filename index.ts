@@ -115,6 +115,7 @@ class WxSocket {
   }
 
   static helper = {
+    messageIndex: 0,
     isFunction(any: any): boolean{
       return typeof any === 'function';
     },
@@ -127,8 +128,11 @@ class WxSocket {
     isPlainObject(any){
       return Object.prototype.toString.call(any) === '[object Object]';
     },
+    get nextId() {
+      return this.messageIndex++;
+    },
     get id(): string {
-      return Date.now() + Math.random().toString().substr(2, 3);
+      return Date.now() + '.' + this.nextId;
     }
   };
 
