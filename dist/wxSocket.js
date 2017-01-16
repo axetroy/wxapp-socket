@@ -101,7 +101,6 @@ var WxSocket = (function () {
      * @returns {Promise<T>}
      */
     WxSocket.prototype.send = function (msg, config) {
-        if (config === void 0) { config = {}; }
         var content = this.wrapMsg(msg);
         var WxSocket = this;
         return new Promise(function (resolve, reject) {
@@ -123,8 +122,10 @@ var WxSocket = (function () {
                     wx.sendSocketMessage({
                         data: JSON.stringify(content),
                         success: function () {
-                            WxSocket.finishRequest(content.id);
-                            resolve();
+                            if (config.noResponse) {
+                                WxSocket.finishRequest(content.id);
+                                resolve();
+                            }
                         },
                         fail: function () {
                             WxSocket.finishRequest(content.id);
@@ -221,7 +222,7 @@ var WxSocket = (function () {
                 }
             }
             callbacks = (_this.listener[_this.ALL] || []).concat(callbacks);
-            callbacks.forEach(function (func) { return typeof func === 'function' && func(data); });
+            callbacks.forEach(function (func) { return WxSocket.helper.isFunction(func) && func(data); });
         });
         return this;
     };
