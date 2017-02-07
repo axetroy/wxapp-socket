@@ -102,6 +102,7 @@ var WxSocket = (function () {
      */
     WxSocket.prototype.send = function (msg, config) {
         var content = this.wrapMsg(msg);
+        config = config || {};
         var WxSocket = this;
         return new Promise(function (resolve, reject) {
             WxSocket.promiseMaps[content.id] = {
