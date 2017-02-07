@@ -45,6 +45,7 @@ class WxSocket {
    */
   public send(msg: any, config?: SendMessageConfig): Promise<any> {
     let content: any = this.wrapMsg(msg);
+    config = config || {};
     const WxSocket: WxSocket = this;
     return new Promise(function (resolve, reject) {
       WxSocket.promiseMaps[content.id] = {
