@@ -1,5 +1,7 @@
 # 用于微信小程序的socket库
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/axetroy/wxapp-socket.svg)](https://greenkeeper.io/)
+
 需要服务器配合，服务器需要返回一样的结构体
 
 ```typescript
