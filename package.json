@@ -14,7 +14,7 @@
   "author": "axetroy",
   "license": "ISC",
   "devDependencies": {
-    "ts-loader": "^2.0.1",
+    "ts-loader": "^2.1.0",
     "typescript": "^2.1.5",
     "webpack": "2.5.0"
   }
